@@ -1,9 +1,9 @@
-import Films from "./components/Films.tsx";
+import Users from "./components/Users.tsx";
 
 const App = () => {
   return (
-    <div className="p-4">
-      <Films />
+    <div>
+      <Users />
     </div>
   );
 };
