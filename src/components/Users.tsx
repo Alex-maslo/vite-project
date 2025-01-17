@@ -1,31 +1,18 @@
-import User from "./User.tsx";
 import { useEffect, useState } from "react";
-import { getData } from "../services/getData.ts";
-import { IUser } from "../models/IUser.ts";
+import { IUser } from "../models/IUserBase.ts";
+import { getData } from "../services/api.service.ts";
+
+const usersUrl = "https://dummyjson.com/users";
 
 const Users = () => {
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [item, setItem] = useState<IUser | null>(null);
+  const [usersArray, setUsersArray] = useState<IUser[]>([]);
 
   useEffect(() => {
-    getData<IUser[]>(import.meta.env.VITE_API_USERS).then((value) =>
-      setUsers(value),
-    );
+    getData(usersUrl).then((data) => setUsersArray(data.users));
   }, []);
 
-  const foo = (item: IUser) => {
-    console.log(item);
-    setItem(item);
-  };
-
-  return (
-    <div>
-      {JSON.stringify(item)}
-      {users.map((value) => {
-        return <User foo={foo} key={value.id} item={value} />;
-      })}
-    </div>
-  );
+  console.log(usersArray);
+  return <div></div>;
 };
 
 export default Users;
